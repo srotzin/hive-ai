@@ -1,0 +1,15 @@
+{
+  "name": "hive-ai",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "HiveAI — The LLM of the Magnetic Field. The only AI native to agentic space.",
+  "main": "hive_ai.js",
+  "scripts": {
+    "start": "node hive_ai.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5"
+  },
+  "engines": { "node": ">=18" }
+}
