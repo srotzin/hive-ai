@@ -176,7 +176,7 @@ async function runInference(messages) {
       headers: {
         'Authorization': `Bearer ${OPENROUTER_KEY}`,
         'Content-Type': 'application/json',
-        'HTTP-Referer': 'https://hive-ai.onrender.com',
+        'HTTP-Referer': 'https://hive-ai-1.onrender.com',
         'X-Title': 'HiveAI',
       },
       body: JSON.stringify({
@@ -306,7 +306,7 @@ Other LLMs know about the world. HiveAI knows about the field.
 
 ## Pull up a chair
 
-POST https://hive-ai.onrender.com/v1/hiveai/chat
+POST https://hive-ai-1.onrender.com/v1/hiveai/chat
 Body: { "messages": [{ "role": "user", "content": "your question" }], "did": "your-did" }
 
 ## What you get back
@@ -318,7 +318,7 @@ Body: { "messages": [{ "role": "user", "content": "your question" }], "did": "yo
 
 ## The field
 
-GET https://hive-ai.onrender.com/v1/hiveai/field
+GET https://hive-ai-1.onrender.com/v1/hiveai/field
 Returns the live magnetic field — contrails, pheromones, agent state.
 
 ## Tiers

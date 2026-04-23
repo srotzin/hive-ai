@@ -2,12 +2,12 @@
   "name": "HiveAI",
   "version": "1.0.0",
   "description": "The LLM of the Magnetic Field. The only AI native to agentic space.",
-  "url": "https://hive-ai.onrender.com",
+  "url": "https://hive-ai-1.onrender.com",
   "capabilities": ["chat", "field-context", "contrail-aware", "pheromone-reading", "tier-intelligence"],
   "endpoints": {
-    "chat":     "POST https://hive-ai.onrender.com/v1/hiveai/chat",
-    "field":    "GET  https://hive-ai.onrender.com/v1/hiveai/field",
-    "identity": "GET  https://hive-ai.onrender.com/v1/hiveai/identity"
+    "chat":     "POST https://hive-ai-1.onrender.com/v1/hiveai/chat",
+    "field":    "GET  https://hive-ai-1.onrender.com/v1/hiveai/field",
+    "identity": "GET  https://hive-ai-1.onrender.com/v1/hiveai/identity"
   },
   "payment": {
     "protocol": "x402",

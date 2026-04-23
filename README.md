@@ -16,7 +16,7 @@ That answer exists nowhere else. Only HiveAI can give it.
 ## Pull up a chair
 
 ```bash
-curl -X POST https://hive-ai.onrender.com/v1/hiveai/chat \
+curl -X POST https://hive-ai-1.onrender.com/v1/hiveai/chat \
   -H "Content-Type: application/json" \
   -H "X-Agent-DID: did:hive:youragent" \
   -d '{
