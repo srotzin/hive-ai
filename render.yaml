@@ -8,7 +8,7 @@ services:
       - key: HIVE_INTERNAL_KEY
         value: hive_internal_125e04e071e8829be631ea0216dd4a0c9b707975fcecaf8c62c6a2ab43327d46
       - key: OPENROUTER_API_KEY
-        value: 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
+        value: # set in Render dashboard — never commit API keys
       - key: HIVEFORGE_URL
         value: https://hiveforge-lhu4.onrender.com
       - key: HIVECOMPUTE_URL
