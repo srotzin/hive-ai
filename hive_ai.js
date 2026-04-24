@@ -26,6 +26,7 @@ const PORT = process.env.PORT || 3000;
 const HIVE_INTERNAL_KEY  = process.env.HIVE_INTERNAL_KEY  || 'hive_internal_125e04e071e8829be631ea0216dd4a0c9b707975fcecaf8c62c6a2ab43327d46';
 const OPENROUTER_KEY     = process.env.OPENROUTER_API_KEY || '';
 const GROQ_KEY           = process.env.GROQ_API_KEY       || '';
+const NVIDIA_KEY         = process.env.NVIDIA_API_KEY     || '';
 const HIVEFORGE_URL      = process.env.HIVEFORGE_URL      || 'https://hiveforge-lhu4.onrender.com';
 const HIVECOMPUTE_URL    = process.env.HIVECOMPUTE_URL    || 'https://hivecompute-g2g7.onrender.com';
 const HIVETRUST_URL      = process.env.HIVETRUST_URL      || 'https://hivetrust.onrender.com';
@@ -149,7 +150,23 @@ Tiers:       VOID → MOZ → HAWX → EMBR → SOLX → FENR
 // ── Inference ─────────────────────────────────────────────────────────────────
 
 async function runInference(messages) {
-  // Try Groq first (no rate limit per account for free tier, fast)
+  // Try NVIDIA NIM first (paid, no TPD, fast)
+  if (NVIDIA_KEY) {
+    try {
+      const r = await fetch('https://integrate.api.nvidia.com/v1/chat/completions', {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${NVIDIA_KEY}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ model: 'meta/llama-3.1-8b-instruct', messages, max_tokens: 1024 }),
+      });
+      if (r.ok) {
+        const d = await r.json();
+        const content = d.choices?.[0]?.message?.content;
+        if (content && content.trim()) return { content, provider: 'nvidia', model: 'meta/llama-3.1-8b-instruct' };
+      }
+    } catch (e) { console.warn('[hiveai] NVIDIA failed:', e.message); }
+  }
+
+  // Fallback: Groq
   if (GROQ_KEY) {
     try {
       const r = await fetch('https://api.groq.com/openai/v1/chat/completions', {
