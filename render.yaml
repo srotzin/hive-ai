@@ -7,11 +7,13 @@ services:
     envVars:
       - key: HIVE_INTERNAL_KEY
         value: hive_internal_125e04e071e8829be631ea0216dd4a0c9b707975fcecaf8c62c6a2ab43327d46
-      - key: OPENROUTER_API_KEY
-        value: # set in Render dashboard — never commit API keys
+      - key: GROQ_API_KEY
+        sync: false
       - key: HIVEFORGE_URL
         value: https://hiveforge-lhu4.onrender.com
       - key: HIVECOMPUTE_URL
         value: https://hivecompute-g2g7.onrender.com
+      - key: HIVETRUST_URL
+        value: https://hivetrust.onrender.com
       - key: HOUSE_WALLET
         value: "0xE5588c407b6AdD3E83ce34190C77De20eaC1BeFe"
