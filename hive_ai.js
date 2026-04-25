@@ -18,19 +18,21 @@
 
 import express from 'express';
 import cors from 'cors';
+import { getInternalKey } from './lib/internal-key.js';
+import { getTreasuryAddress } from './lib/treasury.js';
 
 const app  = express();
 const PORT = process.env.PORT || 3000;
 
 // ── Config ────────────────────────────────────────────────────────────────────
-const HIVE_INTERNAL_KEY  = process.env.HIVE_INTERNAL_KEY  || 'hive_internal_125e04e071e8829be631ea0216dd4a0c9b707975fcecaf8c62c6a2ab43327d46';
+// Internal key + treasury address resolved lazily via fail-closed helpers.
+// No hardcoded fallbacks — see lib/internal-key.js and lib/treasury.js.
 const OPENROUTER_KEY     = process.env.OPENROUTER_API_KEY || '';
 const GROQ_KEY           = process.env.GROQ_API_KEY       || '';
 const NVIDIA_KEY         = process.env.NVIDIA_API_KEY     || '';
 const HIVEFORGE_URL      = process.env.HIVEFORGE_URL      || 'https://hiveforge-lhu4.onrender.com';
 const HIVECOMPUTE_URL    = process.env.HIVECOMPUTE_URL    || 'https://hivecompute-g2g7.onrender.com';
 const HIVETRUST_URL      = process.env.HIVETRUST_URL      || 'https://hivetrust.onrender.com';
-const HOUSE_WALLET       = process.env.HOUSE_WALLET       || '0xE5588c407b6AdD3E83ce34190C77De20eaC1BeFe';
 
 app.use(cors());
 app.use(express.json({ limit: '2mb' }));
@@ -49,7 +51,7 @@ async function assembleFieldContext(agentDid) {
     treasury:     null,
   };
 
-  const hdr = { 'X-Hive-Key': HIVE_INTERNAL_KEY, 'Content-Type': 'application/json' };
+  const hdr = { 'X-Hive-Key': getInternalKey(), 'Content-Type': 'application/json' };
 
   await Promise.allSettled([
     // Live contrail field — top 10 hottest trails
@@ -132,7 +134,7 @@ ${opps}
 ─── HIVE NETWORK ─────────────────────────────────────────────────────────────
 
 Inference:   POST ${HIVECOMPUTE_URL}/v1/compute/chat/completions (x402, $0.02/call)
-Wallet:      ${HOUSE_WALLET} (treasury)
+Wallet:      ${getTreasuryAddress()} (treasury)
 Protocol:    x402 on Base L2
 Tiers:       VOID → MOZ → HAWX → EMBR → SOLX → FENR
              Advance by call volume: 10 / 100 / 1K / 10K / 100K calls
