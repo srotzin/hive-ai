@@ -16,4 +16,4 @@ services:
       - key: HIVETRUST_URL
         value: https://hivetrust.onrender.com
       - key: HOUSE_WALLET
-        value: "0xE5588c407b6AdD3E83ce34190C77De20eaC1BeFe"
+        value: "0x15184bf50b3d3f52b60434f8942b7d52f2eb436e"
